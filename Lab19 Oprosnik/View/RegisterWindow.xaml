@@ -1,0 +1,96 @@
+﻿<Window
+    x:Class="Lab19_Oprosnik.View.RegisterWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Lab19_Oprosnik.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:psa="clr-namespace:Lab19_Oprosnik.Behaviours"
+    Title="Регистрация"
+    Width="500"
+    Height="400"
+    mc:Ignorable="d">
+    <Window.Resources />
+
+    <Window.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="E-mail адрес:" />
+                <TextBox
+                    Grid.Row="1"
+                    md:ValidationAssist.UsePopup="True"
+                    Text="{Binding Email}" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Введите пароль:" />
+                <!--  Сделать так, чтобы при наведении говорил, что пароль должен состоять из цифр и букв(хз как я это проверю)  -->
+                <PasswordBox
+                    Grid.Row="1"
+                    psa:PasswordBoxAssistant.BindPassword="True"
+                    psa:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Повторите пароль" />
+                <!--  если пароли совпадают, делать зелёным это окно  -->
+                <PasswordBox Grid.Row="1" />
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Дата рождения" />
+                <TextBox Grid.Row="1" Text="{Binding Birthday}" />
+            </Grid>
+
+            <Grid Grid.Row="4" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Пол" />
+                <!--  в зависимости от пола отображать после регистрации своем портфолио картинку пацан ты или девушка  -->
+                <StackPanel Grid.Row="1">
+                    <RadioButton Content="Муж" IsChecked="{Binding Sex}" />
+                    <RadioButton Content="Жен" />
+                </StackPanel>
+            </Grid>
+            <!--  ВАЖНО! при парсинге проверять на существование в БД уже такого емейла(в отдельном потоке)  -->
+            <Button
+                Grid.Row="5"
+                Grid.ColumnSpan="2"
+                md:ShadowAssist.ShadowDepth="Depth1"
+                Command="{Binding RegistrationCommand}"
+                Content="Зарегистрироваться" />
+        </Grid>
+    </Window.Content>
+</Window>
