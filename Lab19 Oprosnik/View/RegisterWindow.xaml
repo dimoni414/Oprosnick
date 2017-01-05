@@ -11,7 +11,16 @@
     Width="500"
     Height="400"
     mc:Ignorable="d">
-    <Window.Resources />
+    <Window.Resources>
+        <!--<ControlTemplate x:Key="validationFailed">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="OrangeRed">
+                    <AdornedElementPlaceholder />
+                </Border>
+                <TextBlock FontSize="26" Foreground="DarkRed" />
+            </StackPanel>
+        </ControlTemplate>-->
+    </Window.Resources>
 
     <Window.Content>
         <Grid>
@@ -28,16 +37,24 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
+
             <Grid Grid.Row="0" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Content="E-mail адрес:" />
-                <TextBox
-                    Grid.Row="1"
-                    md:ValidationAssist.UsePopup="True"
-                    Text="{Binding Email}" />
+                <TextBox Grid.Row="1">
+                    <!--  Validation.ErrorTemplate="{StaticResource validationFailed}"  -->
+                    <TextBox.Text>
+                        <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
 
             <Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -45,12 +62,32 @@
                     <RowDefinition Height="25" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Content="Введите пароль:" />
+
+
+                <md:Chip
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="2"
+                    Margin="0,0,5,0"
+                    Background="{Binding ColorPassw1Brush}"
+                    Content="{Binding LengthPassw1}"
+                    IsEnabled="False" />
+
+
                 <!--  Сделать так, чтобы при наведении говорил, что пароль должен состоять из цифр и букв(хз как я это проверю)  -->
                 <PasswordBox
+                    Name="PasswordBox"
                     Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
                     psa:PasswordBoxAssistant.BindPassword="True"
-                    psa:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    psa:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordStr1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </Grid>
 
             <Grid Grid.Row="2" Grid.ColumnSpan="2">
@@ -58,18 +95,53 @@
                     <RowDefinition Height="25" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Content="Повторите пароль" />
-                <!--  если пароли совпадают, делать зелёным это окно  -->
-                <PasswordBox Grid.Row="1" />
-            </Grid>
 
+                <md:Chip
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="2"
+                    Margin="0,0,5,0"
+                    Background="{Binding ColorPassw2Brush}"
+                    Content="{Binding LengthPassw2}"
+                    IsEnabled="False" />
+
+                <PasswordBox
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    psa:PasswordBoxAssistant.BindPassword="True"
+                    psa:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordStr2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+            </Grid>
+            <!--  не могу увеличить высоту.... вообще хз почему  -->
             <Grid Grid.Row="3" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="Дата рождения" />
-                <TextBox Grid.Row="1" Text="{Binding Birthday}" />
+                <DatePicker
+                    Grid.Row="1"
+                    Height="auto"
+                    DisplayDateEnd="{Binding DateTimeLastBirthday}"
+                    IsDropDownOpen="False"
+                    SelectedDateFormat="Short">
+                    <DatePicker.SelectedDate>
+                        <Binding
+                            Path="SelectedDateBirthday"
+                            UpdateSourceTrigger="LostFocus"
+                            ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
             </Grid>
 
             <Grid Grid.Row="4" Grid.ColumnSpan="2">
@@ -84,9 +156,10 @@
                     <RadioButton Content="Жен" />
                 </StackPanel>
             </Grid>
-            <!--  ВАЖНО! при парсинге проверять на существование в БД уже такого емейла(в отдельном потоке)  -->
+
             <Button
                 Grid.Row="5"
+                Grid.Column="0"
                 Grid.ColumnSpan="2"
                 md:ShadowAssist.ShadowDepth="Depth1"
                 Command="{Binding RegistrationCommand}"

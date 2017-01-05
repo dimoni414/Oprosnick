@@ -16,17 +16,17 @@ namespace Lab19_Oprosnik
                 return;
             }
             storage = value;
-            OnPropertyChange(propertyName);
+            OnPropertyChanged(propertyName);
         }
 
-        protected void OnPropertyChange(string propertyName)
+        protected void OnPropertyChanged([CallerMemberName]string propertyName=null)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
             {
                 throw new ArgumentNullException(nameof(propertyName));
             }
             PropertyChanged?.Invoke(this,
-                new PropertyChangedEventArgs(nameof(propertyName)));
+                new PropertyChangedEventArgs(propertyName));
         }
     }
 }

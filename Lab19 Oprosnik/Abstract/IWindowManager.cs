@@ -5,13 +5,13 @@ namespace Lab19_Oprosnik.Abstract
 {
     public interface IWindowManager
     {
-        void Close(WindowType windowType);
-
         void Show(WindowType windowType, string param);
+
+        void Close(WindowType windowType);
     }
 
     public interface IViewModel
     {
-        Action CloseAction { get; set; }
+      
     }
 }

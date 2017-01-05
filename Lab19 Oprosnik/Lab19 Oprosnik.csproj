@@ -67,14 +67,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Abstract\ICommandFactory.cs" />
     <Compile Include="Abstract\IDataBaseWork.cs" />
     <Compile Include="Abstract\IWindowManager.cs" />
     <Compile Include="Behaviours\PasswordBoxAssistant.cs" />
-    <Compile Include="RelayCommad.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="Factory\CommandFactory.cs" />
     <Compile Include="Services\DataBaseWorkService.cs" />
     <Compile Include="Services\RegAndLoginPeopleService.cs" />
     <Compile Include="Services\User.cs" />
     <Compile Include="Services\WindowManagerService.cs" />
+    <Compile Include="Validation\ValidationRegisterData.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="View\RegisterWindow.xaml.cs">
@@ -148,9 +151,7 @@
   <ItemGroup>
     <Resource Include="Wooow.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Factory\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

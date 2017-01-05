@@ -1,22 +1,11 @@
 ﻿using Lab19_Oprosnik.Abstract;
 using Lab19_Oprosnik.Services;
-using Lab19_Oprosnik.View;
 using System;
 using System.Windows;
 using System.Windows.Input;
 
 namespace Lab19_Oprosnik.ViewModels
 {
-    /// <LoginViewModel>
-    /// Я еще сделаю обязательно парсинг введеных данных. пока Вьюшка - шаболнчик
-    /// </LoginViewModel>
-    public enum Status
-    {
-        Error,
-        User,
-        Admin
-    }
-
     public class LoginViewModel : ViewModelBase, IViewModel
     {
         public ICommand OpenRegisterWindowCommand { get; private set; }
@@ -35,24 +24,27 @@ namespace Lab19_Oprosnik.ViewModels
             set { UpdateValue(value, ref _email); }
         }
 
-        public LoginViewModel(WindowManagerService windowManager, string s = null)
+        public LoginViewModel(WindowManagerService windowManager, ICommandFactory commandFactory)
         {
-            Email = "dimoni414@ya.ru";
+            //Email = "dimoni414@ya.ru";
             _regAndLoginPeopleService = new RegAndLoginPeopleService();
             _windowManager = windowManager;
-            OpenRegisterWindowCommand = new RelayCommad<string>((param) => windowManager.Show(WindowType.Register, param));
-            TryLoginCommand = new RelayCommad<object>(TryLogin);
+
+            OpenRegisterWindowCommand = commandFactory.CreateCommand((param) 
+                => windowManager.Show(WindowType.Register, param as string));
+
+            TryLoginCommand = commandFactory.CreateCommand(TryLogin);
         }
 
         private void TryLogin(object obj)
         {
-            User user = null;
+            User user;
             try
             {
                 user = _regAndLoginPeopleService.FindPeople(Email, Password);
                 if (user == null)
                 {
-                    throw new ArgumentNullException(nameof(user), "Ошибка при создании человека");
+                    throw new ArgumentNullException(nameof(user), @"Ошибка при создании человека");
                 }
             }
             catch (Exception ex)
@@ -61,43 +53,13 @@ namespace Lab19_Oprosnik.ViewModels
                 return;
             }
 
-            if (user.IsAdmin)
-            {
-                _windowManager.Show(WindowType.Admin, user.Email);
-            }
-            else
-            {
-                _windowManager.Show(WindowType.Main, user.Email);
-            }
+            _windowManager.Show(user.IsAdmin ? WindowType.Admin : WindowType.Main, user.Email);
             _windowManager.Close(WindowType.Login);
-
-            //switch ()
-            //{
-            //    case Status.Error:
-            //        MessageBox.Show("Не правильный логин или пароль. Попробуйте снова");
-            //        break;
-
-            //    case Status.User:
-            //        _createAndOpenWindow.MainWindow(Email);
-            //        App.Current.Windows[0].Close();
-            //        break;
-
-            //    case Status.Admin:
-            //        _createAndOpenWindow.AdminWindow(Email);
-            //        App.Current.Windows[0].Close();
-            //        break;
-
-            //    default:
-            //        break;
-            //}
         }
 
-        private AdminWindow _adminWindow;
-        private MainWindow _mainWindow;
-        private RegAndLoginPeopleService _regAndLoginPeopleService;
+        private readonly RegAndLoginPeopleService _regAndLoginPeopleService;
         private string _email;
         private string _password;
-        private WindowManagerService _windowManager;
-        public Action CloseAction { get; set; }
+        private readonly WindowManagerService _windowManager;
     }
 }

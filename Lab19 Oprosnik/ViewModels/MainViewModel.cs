@@ -1,22 +1,17 @@
 ﻿using Lab19_Oprosnik.Abstract;
+using Lab19_Oprosnik.Factory;
 using Lab19_Oprosnik.Services;
-using System;
 
-namespace Lab19_Oprosnik
+namespace Lab19_Oprosnik.ViewModels
 {
     internal class MainViewModel : IViewModel
     {
-        private string param;
 
-        public MainViewModel()
+        public MainViewModel(WindowManagerService windowManagerService, CommandFactory commandFactory, string param)
         {
+            _param = param;
         }
+        private string _param;
 
-        public MainViewModel(WindowManagerService windowManagerService, string param)
-        {
-            this.param = param;
-        }
-
-        public Action CloseAction { get; set; }
     }
 }

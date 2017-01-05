@@ -7,7 +7,7 @@ namespace Lab19_Oprosnik.Services
 {
     public class DataBaseWorkService : IDataBaseWork
     {
-        public int AddPeopleToDataBase(User user)
+        public int AddUser(User user)
         {
             var connection = TryConnectionToDataBase();
 
@@ -19,7 +19,20 @@ namespace Lab19_Oprosnik.Services
             }
         }
 
-        public User FindPeopleInDataBase(string email, string password)
+        public bool IsExistEmail(string email)
+        {
+            var connection = TryConnectionToDataBase();
+
+            var sqlExpression = $"SELECT * FROM OprosUsersCol WHERE EmailAdress = '{email}'";
+            using (var sqlCommand = new SqlCommand(sqlExpression, connection))
+            {
+                var reader = sqlCommand.ExecuteReader();
+
+                return reader.HasRows;
+            }
+        }
+
+        public User FindRegistredUser(string email, string password)
         {
             var connection = TryConnectionToDataBase();
 

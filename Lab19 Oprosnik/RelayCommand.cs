@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace Lab19_Oprosnik
 {
-    public class RelayCommad<TArg> : ICommand
+    public class RelayCommand<TArg> : ICommand
     {
         public event EventHandler CanExecuteChanged
         {
@@ -11,7 +11,7 @@ namespace Lab19_Oprosnik
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public RelayCommad(Action<TArg> execute, Func<TArg, bool> canexecute = null)
+        public RelayCommand(Action<TArg> execute, Func<TArg, bool> canexecute = null)
         {
             if (execute == null)
             {
