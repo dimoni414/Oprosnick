@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <BitmapImage x:Key="AddAdmin" UriSource="pack://application:,,,/Lab19 Oprosnik;component/Resources/Admin/AddAdmin.png" />
+    <BitmapImage x:Key="AddSurvay" UriSource="pack://application:,,,/Lab19 Oprosnik;component/Resources/Admin/AddSurvey.png" />
+    <BitmapImage x:Key="AnalysisSurvey" UriSource="pack://application:,,,/Lab19 Oprosnik;component/Resources/Admin/AnalysisSurvey.png" />
+    <BitmapImage x:Key="ChangeSurvey" UriSource="pack://application:,,,/Lab19 Oprosnik;component/Resources/Admin/ChangeSurvey.png" />
+    <BitmapImage x:Key="DeleteUser" UriSource="pack://application:,,,/Lab19 Oprosnik;component/Resources/Admin/DeleteUser.png" />
+    <BitmapImage x:Key="JoinSurveyResults" UriSource="pack://application:,,,/Lab19 Oprosnik;component/Resources/Admin/JoinSurveyResults.png" />
+</ResourceDictionary>

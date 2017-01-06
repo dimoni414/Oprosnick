@@ -5,6 +5,8 @@ using Lab19_Oprosnik.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Lab19_Oprosnik.Services
 {
@@ -24,11 +26,11 @@ namespace Lab19_Oprosnik.Services
             _dictionaryWindows = new Dictionary<WindowType, Window>();
         }
 
-        public void Show(WindowType windowType, string param)
+        public void Show(WindowType windowType, User user)
         {
             var window = SwitchWindow(windowType);
             window.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            window.DataContext = SwitchViewModel(windowType, param);
+            window.DataContext = SwitchViewModel(windowType, user);
 
             if (!CanCreateWindow(windowType))
             {
@@ -42,6 +44,11 @@ namespace Lab19_Oprosnik.Services
         {
             _dictionaryWindows[windowType].Close();
             _dictionaryWindows.Remove(windowType);
+        }
+
+        public IViewModel GetViewModel(WindowType windowType)
+        {
+            return _dictionaryWindows[windowType].DataContext as IViewModel;
         }
 
         private Window SwitchWindow(WindowType windowType)
@@ -74,21 +81,21 @@ namespace Lab19_Oprosnik.Services
             return win;
         }
 
-        private IViewModel SwitchViewModel(WindowType windowType, string param)
+        private IViewModel SwitchViewModel(WindowType windowType, User user)
         {
             switch (windowType)
             {
                 case WindowType.Admin:
-                    return new AdminViewModel(this, _commandFactory, param);
+                    return new AdminViewModel(this, _commandFactory, user);
 
                 case WindowType.Login:
                     return new LoginViewModel(this, _commandFactory);
 
                 case WindowType.Main:
-                    return new MainViewModel(this, _commandFactory, param);
+                    return new MainViewModel(this, _commandFactory, user);
 
                 case WindowType.Register:
-                    return new RegisterViewModel(this, _commandFactory, param);
+                    return new RegisterViewModel(this, _commandFactory, user);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(windowType), windowType, null);

@@ -11,6 +11,11 @@
             IsAdmin = isAdmin;
         }
 
+        public User(string email)
+        {
+            Email = email;
+        }
+
         public string Email { get; private set; }
 
         public string Password { get; private set; }

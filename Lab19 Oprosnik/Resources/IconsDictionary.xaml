@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Lab19_Oprosnik.Resources">
+    <BitmapImage x:Key="LoginIcon" UriSource="pack://application:,,,/Resources/Icons/LoginIcon.ico" />
+    <BitmapImage x:Key="AdminIcon" UriSource="pack://application:,,,/Resources/Icons/AdminIcon.ico" />
+    <BitmapImage x:Key="SurveyIcon" UriSource="pack://application:,,,/Resources/Icons/MainIcon.ico" />
+    <BitmapImage x:Key="RegistrationIcon" UriSource="pack://application:,,,/Resources/Icons/RegistrationIcon.ico" />
+
+</ResourceDictionary>

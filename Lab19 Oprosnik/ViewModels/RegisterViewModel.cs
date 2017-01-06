@@ -14,6 +14,8 @@ namespace Lab19_Oprosnik.ViewModels
     {
         public ICommand RegistrationCommand { get; private set; }
 
+        #region Properties
+
         public string Email
         {
             get { return _email; }
@@ -80,10 +82,12 @@ namespace Lab19_Oprosnik.ViewModels
 
         public DateTime DateTimeLastBirthday { get; set; }
 
-        public RegisterViewModel(WindowManagerService windowManagerService, CommandFactory commandFactory, string email)
+        #endregion Properties
+
+        public RegisterViewModel(WindowManagerService windowManagerService, CommandFactory commandFactory, User user)
         {
             _windowManagerService = windowManagerService;
-            Email = email;
+            Email = user.Email;
             Sex = true;
             DateTimeLastBirthday = GetAdultDate();
             SelectedDateBirthday = null;
@@ -91,6 +95,8 @@ namespace Lab19_Oprosnik.ViewModels
 
             _registerPeopleService = new RegAndLoginPeopleService();
             _validationRegisterData = new ValidationRegisterData();
+           
+            
 
             RegistrationCommand = new RelayCommand<object>(RegisterNewPeople);
         }
@@ -108,6 +114,7 @@ namespace Lab19_Oprosnik.ViewModels
                     if (_registerPeopleService.AddNewPeople(Email, PasswordStr2, SelectedDateBirthday.Value.ToShortDateString(), Sex, false))
                     {
                         MessageBox.Show("Вы упешно зарегистрированы!");
+                        ((LoginViewModel) _windowManagerService.GetViewModel(WindowType.Login)).Email = Email;
                         _windowManagerService.Close(WindowType.Register);
                     }
                     else
@@ -165,6 +172,6 @@ namespace Lab19_Oprosnik.ViewModels
 
         private readonly RegAndLoginPeopleService _registerPeopleService;
         private readonly WindowManagerService _windowManagerService;
-        private ValidationRegisterData _validationRegisterData;
+        private readonly ValidationRegisterData _validationRegisterData;
     }
 }

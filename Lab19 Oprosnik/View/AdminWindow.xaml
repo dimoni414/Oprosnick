@@ -1,11 +1,146 @@
-﻿<Window x:Class="Lab19_Oprosnik.View.AdminWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lab19_Oprosnik.View"
-        mc:Ignorable="d"
-        Title="AdminWindow" Height="300" Width="300">
-    <Grid>
-    </Grid>
+﻿<Window
+    x:Class="Lab19_Oprosnik.View.AdminWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convBinding="clr-namespace:Lab19_Oprosnik.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Lab19_Oprosnik.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="AdminWindow"
+    Width="1000"
+    Height="540"
+    Icon="{StaticResource AdminIcon}"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/ResourcesAdmin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <convBinding:VisibilityConverter x:Key="VisibilityConverter" />
+
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style x:Key="WrapImage" TargetType="RadioButton">
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Opacity" Value="0.5" />
+                                <Setter Property="Background" Value="Transparent" />
+
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Background" Value="LightGreen" />
+                            </Trigger>
+                        </Style.Triggers>
+
+                        <Setter Property="BorderThickness" Value="2" />
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+
+                                <ControlTemplate x:Name="ControlTemplate" TargetType="RadioButton">
+                                    <!--  Я НЕ СМОГ ОТПОЗИЦИОНИРОВАТЬ ТУЛЛТИП!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!  -->
+                                    <Border
+                                        Margin="0,0,0,15"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="20"
+                                        Cursor="Hand"
+                                        ToolTipService.InitialShowDelay="1"
+                                        ToolTipService.Placement="Right"
+                                        ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource Mode=Self}}"
+                                        ToolTipService.VerticalOffset="-50">
+                                        <Image Source="{Binding Path=Content, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    </Border>
+
+
+                                    <ControlTemplate.Triggers>
+
+                                        <EventTrigger RoutedEvent="MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation
+                                                        AutoReverse="True"
+                                                        Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                        To="LightGreen"
+                                                        Duration="0:0:0.5" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </StackPanel.Resources>
+                <ItemsControl>
+                    <RadioButton
+                        Content="{StaticResource AddSurvay}"
+                        IsChecked="{Binding IsAddSurvay}"
+                        Style="{StaticResource WrapImage}"
+                        ToolTip="Добавление опроса" />
+                    <RadioButton
+                        Content="{StaticResource ChangeSurvey}"
+                        IsChecked="{Binding IsChangeSurvey}"
+                        Style="{StaticResource WrapImage}"
+                        ToolTip="Изменить опросы" />
+                    <RadioButton
+                        Content="{StaticResource AnalysisSurvey}"
+                        IsChecked="{Binding IsAnalysisSurvey}"
+                        Style="{StaticResource WrapImage}"
+                        ToolTip="Результаты опросов" />
+                    <RadioButton
+                        Content="{StaticResource JoinSurveyResults}"
+                        IsChecked="{Binding IsJoinSurveyResults}"
+                        Style="{StaticResource WrapImage}"
+                        ToolTip="Добавление результатов других опросов" />
+                    <RadioButton
+                        Content="{StaticResource AddAdmin}"
+                        IsChecked="{Binding IsAddAdmin}"
+                        Style="{StaticResource WrapImage}"
+                        ToolTip="Добавление администратора" />
+                    <RadioButton
+                        Content="{StaticResource DeleteUser}"
+                        IsChecked="{Binding IsDeleteUser}"
+                        Style="{StaticResource WrapImage}"
+                        ToolTip="Удаление пользователя" />
+
+                </ItemsControl>
+            </StackPanel>
+            <Grid Column="1" Visibility="{Binding IsAddSurvay,Converter={StaticResource VisibilityConverter}}" >
+                <Image Source="{StaticResource AddSurvay}"></Image>
+            </Grid>
+            <Grid Column="1" Visibility="{Binding IsChangeSurvey,Converter={StaticResource VisibilityConverter}}" >
+                <Image Source="{StaticResource ChangeSurvey}"></Image>
+            </Grid>
+            <Grid Column="1" Visibility="{Binding IsAnalysisSurvey,Converter={StaticResource VisibilityConverter}}" >
+                <Image Source="{StaticResource AnalysisSurvey}"></Image>
+            </Grid>
+            <Grid Column="1" Visibility="{Binding IsJoinSurveyResults,Converter={StaticResource VisibilityConverter}}" >
+                <Image Source="{StaticResource JoinSurveyResults}"></Image>
+            </Grid>
+            <Grid Column="1" Visibility="{Binding IsAddAdmin,Converter={StaticResource VisibilityConverter}}" >
+                <Image Source="{StaticResource AddAdmin}"></Image>
+            </Grid>
+            <Grid Column="1" Visibility="{Binding IsDeleteUser,Converter={StaticResource VisibilityConverter}}" >
+                <Image Source="{StaticResource DeleteUser}"></Image>
+            </Grid>
+
+
+
+
+        </Grid>
+    </Window.Content>
 </Window>

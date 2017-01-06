@@ -147,6 +147,6 @@ namespace Lab19_Oprosnik.Validation
             return string.Empty;
         }
 
-        private DataBaseWorkService _dataBaseWorkService;
+        private readonly DataBaseWorkService _dataBaseWorkService;
     }
 }

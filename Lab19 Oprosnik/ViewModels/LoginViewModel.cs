@@ -26,12 +26,14 @@ namespace Lab19_Oprosnik.ViewModels
 
         public LoginViewModel(WindowManagerService windowManager, ICommandFactory commandFactory)
         {
-            //Email = "dimoni414@ya.ru";
+
+            Email = "dimoni414@ya.ru";
             _regAndLoginPeopleService = new RegAndLoginPeopleService();
             _windowManager = windowManager;
 
             OpenRegisterWindowCommand = commandFactory.CreateCommand((param) 
-                => windowManager.Show(WindowType.Register, param as string));
+                => windowManager.Show(WindowType.Register,new User(param as string)));
+
 
             TryLoginCommand = commandFactory.CreateCommand(TryLogin);
         }
@@ -53,7 +55,7 @@ namespace Lab19_Oprosnik.ViewModels
                 return;
             }
 
-            _windowManager.Show(user.IsAdmin ? WindowType.Admin : WindowType.Main, user.Email);
+            _windowManager.Show(user.IsAdmin ? WindowType.Admin : WindowType.Main, user);
             _windowManager.Close(WindowType.Login);
         }
 

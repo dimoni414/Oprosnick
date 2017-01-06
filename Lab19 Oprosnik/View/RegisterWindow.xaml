@@ -10,6 +10,7 @@
     Title="Регистрация"
     Width="500"
     Height="400"
+    Icon="{StaticResource RegistrationIcon}"
     mc:Ignorable="d">
     <Window.Resources>
         <!--<ControlTemplate x:Key="validationFailed">

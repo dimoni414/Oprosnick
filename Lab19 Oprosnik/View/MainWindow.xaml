@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab19_Oprosnik"
         mc:Ignorable="d"
+        Icon="{StaticResource SurveyIcon}"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
     </Grid>
