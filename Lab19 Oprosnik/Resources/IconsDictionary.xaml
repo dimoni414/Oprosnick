@@ -5,5 +5,4 @@
     <BitmapImage x:Key="AdminIcon" UriSource="pack://application:,,,/Resources/Icons/AdminIcon.ico" />
     <BitmapImage x:Key="SurveyIcon" UriSource="pack://application:,,,/Resources/Icons/MainIcon.ico" />
     <BitmapImage x:Key="RegistrationIcon" UriSource="pack://application:,,,/Resources/Icons/RegistrationIcon.ico" />
-
 </ResourceDictionary>

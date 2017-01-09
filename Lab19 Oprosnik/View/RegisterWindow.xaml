@@ -38,7 +38,6 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-
             <Grid Grid.Row="0" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
@@ -70,7 +69,6 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Content="Введите пароль:" />
 
-
                 <md:Chip
                     Grid.Row="0"
                     Grid.RowSpan="2"
@@ -79,7 +77,6 @@
                     Background="{Binding ColorPassw1Brush}"
                     Content="{Binding LengthPassw1}"
                     IsEnabled="False" />
-
 
                 <!--  Сделать так, чтобы при наведении говорил, что пароль должен состоять из цифр и букв(хз как я это проверю)  -->
                 <PasswordBox

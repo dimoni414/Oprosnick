@@ -6,12 +6,8 @@ namespace Lab19_Oprosnik.ViewModels
 {
     internal class MainViewModel : IViewModel
     {
-
         public MainViewModel(WindowManagerService windowManagerService, CommandFactory commandFactory, User param)
         {
-            
         }
-       
-
     }
 }

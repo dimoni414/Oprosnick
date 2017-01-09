@@ -75,6 +75,8 @@
     </ApplicationDefinition>
     <Compile Include="Abstract\ICommandFactory.cs" />
     <Compile Include="Abstract\IDataBaseWork.cs" />
+    <Compile Include="Abstract\ISerializationService.cs" />
+    <Compile Include="Abstract\ISurvey.cs" />
     <Compile Include="Abstract\IWindowManager.cs" />
     <Compile Include="Behaviours\PasswordBoxAssistant.cs" />
     <Compile Include="Converters\VisibilityConverter.cs" />
@@ -85,10 +87,16 @@
     </Compile>
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Factory\CommandFactory.cs" />
+    <Compile Include="Services\BinarySerializationService.cs" />
     <Compile Include="Services\DataBaseWorkService.cs" />
     <Compile Include="Services\RegAndLoginPeopleService.cs" />
     <Compile Include="Services\User.cs" />
     <Compile Include="Services\WindowManagerService.cs" />
+    <Compile Include="Surveys\ChooseManySurvey.cs" />
+    <Compile Include="Surveys\ChooseOneSurvey.cs" />
+    <Compile Include="Surveys\ChooseYesNoSurvey.cs" />
+    <Compile Include="Surveys\QuestionObject.cs" />
+    <Compile Include="Surveys\SurveysCollection.cs" />
     <Compile Include="Validation\ValidationRegisterData.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />

@@ -68,10 +68,9 @@ namespace Lab19_Oprosnik.Validation
                     break;
 
                 case "PasswordStr1":
-                   
-                    
-                        error = ValidatePassword(registerViewModel.PasswordStr1, registerViewModel.PasswordStr2);
-                    
+
+                    error = ValidatePassword(registerViewModel.PasswordStr1, registerViewModel.PasswordStr2);
+
                     break;
 
                 case "PasswordStr2":

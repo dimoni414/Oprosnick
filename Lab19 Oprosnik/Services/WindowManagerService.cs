@@ -5,8 +5,6 @@ using Lab19_Oprosnik.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Lab19_Oprosnik.Services
 {
@@ -34,7 +32,7 @@ namespace Lab19_Oprosnik.Services
 
             if (!CanCreateWindow(windowType))
             {
-               return;
+                return;
             }
             _dictionaryWindows.Add(windowType, window);
             window.Show();
@@ -103,7 +101,6 @@ namespace Lab19_Oprosnik.Services
         }
 
         private bool CanCreateWindow(WindowType windowType) => !_dictionaryWindows.ContainsKey(windowType);
-
 
         private readonly Dictionary<WindowType, Window> _dictionaryWindows;
         private CommandFactory _commandFactory;

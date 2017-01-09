@@ -95,8 +95,6 @@ namespace Lab19_Oprosnik.ViewModels
 
             _registerPeopleService = new RegAndLoginPeopleService();
             _validationRegisterData = new ValidationRegisterData();
-           
-            
 
             RegistrationCommand = new RelayCommand<object>(RegisterNewPeople);
         }
@@ -111,10 +109,10 @@ namespace Lab19_Oprosnik.ViewModels
             {
                 try
                 {
-                    if (_registerPeopleService.AddNewPeople(Email, PasswordStr2, SelectedDateBirthday.Value.ToShortDateString(), Sex, false))
+                    if (_registerPeopleService.AddNewPeople(Email, PasswordStr2, SelectedDateBirthday?.ToShortDateString(), Sex, false))
                     {
                         MessageBox.Show("Вы упешно зарегистрированы!");
-                        ((LoginViewModel) _windowManagerService.GetViewModel(WindowType.Login)).Email = Email;
+                        ((LoginViewModel)_windowManagerService.GetViewModel(WindowType.Login)).Email = Email;
                         _windowManagerService.Close(WindowType.Register);
                     }
                     else

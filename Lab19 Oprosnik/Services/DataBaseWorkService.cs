@@ -73,5 +73,16 @@ namespace Lab19_Oprosnik.Services
             }
             return connection;
         }
+
+        public int DeleteUser(string email)
+        {
+            var connection = TryConnectionToDataBase();
+
+            var sqlExpression = $"DELETE FROM OprosUsersCol WHERE EmailAdress = '{email}'";
+            using (var sqlCommand = new SqlCommand(sqlExpression, connection))
+            {
+                return sqlCommand.ExecuteNonQuery();
+            }
+        }
     }
 }

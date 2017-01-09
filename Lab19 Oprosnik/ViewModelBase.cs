@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace Lab19_Oprosnik
 {
+    [Serializable]
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -19,7 +20,7 @@ namespace Lab19_Oprosnik
             OnPropertyChanged(propertyName);
         }
 
-        protected void OnPropertyChanged([CallerMemberName]string propertyName=null)
+        protected void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
             {

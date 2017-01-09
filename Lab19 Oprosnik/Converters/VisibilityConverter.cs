@@ -6,24 +6,15 @@ using System.Windows.Data;
 namespace Lab19_Oprosnik.Converters
 {
     [ValueConversion(typeof(bool), typeof(Visibility))]
-    public class VisibilityConverter:IValueConverter
+    public class VisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((bool)value)
-            {
-                return Visibility.Visible;
-            }
-            return Visibility.Collapsed;
-        }
+            => (bool) value ? Visibility.Visible : Visibility.Collapsed;
+
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((Visibility)value==Visibility.Visible)
-            {
-                return true;
-            }
-            return false;
-        }
+            => (Visibility) value == Visibility.Visible;
+
+
     }
 }
