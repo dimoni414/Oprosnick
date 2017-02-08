@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Lab19_Oprosnik.Abstract;
+using System;
 using System.Collections.ObjectModel;
-using Lab19_Oprosnik.Abstract;
 
 namespace Lab19_Oprosnik.Surveys
 {
     [Serializable]
-
-    public class ChooseYesNoSurvey:ViewModelBase ,ISurvey
-
+    public class ChooseYesNoSurvey : ViewModelBase, ISurvey
 
     {
         public ObservableCollection<QuestionObject> QuestionsCollection { get; set; }

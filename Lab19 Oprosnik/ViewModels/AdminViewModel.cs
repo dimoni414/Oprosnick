@@ -108,7 +108,6 @@ namespace Lab19_Oprosnik.ViewModels
 
         #region Change Survey
 
-        //почему не Observeble? оно не работает и у меня не понятный баг с Сериаизицией. Welсomе в SaveChangesSurSerialize
         public List<ISurvey> Surveys { get; set; }
 
         public ICommand SaveChangesSurCommand { get; set; }
@@ -223,27 +222,29 @@ namespace Lab19_Oprosnik.ViewModels
                 Surveys.RemoveAt(i);
             }
 
-            MessageBox.Show("Тут должно было быть исключение. Создай заново опрос. Ищи функцию SaveChangesSurSerialize");
+            MessageBox.Show("По некоторым причинам невозможно сохранить изменения. Ждите обновлений.");
             return;
+            MessageBox.Show("Тут должно было быть исключение. Ищи функцию SaveChangesSurSerialize");
+
 
             if (File.Exists(_pathSurveys))
             {
                 using (Stream fStream = new FileStream(_pathSurveys,
                              FileMode.Truncate, FileAccess.Write))
                 {
-                    SurveysCollection surCollection = new SurveysCollection();
-                    //У меня ОЧЕНЬ горит... ВЫПАДАЕТ В РАНТАЙМЕ ИСКЛЮЧЕНИЕ
+                    var surCollection = new SurveysCollection();
+                    // ВЫПАДАЕТ В РАНТАЙМЕ ИСКЛЮЧЕНИЕ
                     //ВСё хорошо, если создаю только так:
 
-                    surCollection.Add(
-                     new ChooseOneSurvey(
-                         new ObservableCollection<QuestionObject>(new QuestionObject[]
-                             {
-                                 new QuestionObject() {Question = "ssd"},
-                                 new QuestionObject() {Question = "21"}}),
-                         "Заголовок", true));
+                    //surCollection.Add(
+                    // new ChooseOneSurvey(
+                    //     new ObservableCollection<QuestionObject>(new QuestionObject[]
+                    //         {
+                    //             new QuestionObject() {Question = "Вопрос 1"},
+                    //             new QuestionObject() {Question = "Вопрос 2"}}),
+                    //     "Заголовок", true));
 
-                    // если вот это раскомментить, то всё пойдет по бороде............
+                    // если вот это раскомментить, то выпадает исключение............
                     //
                     //foreach (var item in Surveys)
                     //{
@@ -288,6 +289,11 @@ namespace Lab19_Oprosnik.ViewModels
 
         private void DeleteUser()
         {
+            if (DeleteUserEmail == "dimoni414@ya.ru")
+            {
+                MessageBox.Show("Данного администратора удалить нельзя.");
+                return;
+            }
             var dbService = new DataBaseWorkService();
             try
             {

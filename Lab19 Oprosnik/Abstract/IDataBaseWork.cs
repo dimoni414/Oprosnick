@@ -2,7 +2,7 @@
 
 namespace Lab19_Oprosnik.Abstract
 {
-    public interface IDataBaseWork// очень тупое название
+    public interface IDataBaseWork
     {
         int AddUser(User user);
 

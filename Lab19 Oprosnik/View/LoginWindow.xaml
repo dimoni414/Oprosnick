@@ -10,37 +10,8 @@
     Title="Авторизация"
     Width="320"
     Height="270"
-    mc:Ignorable="d"
-    Icon="{StaticResource LoginIcon}">
-    <Window.Resources>
-        <!--<Style TargetType="Button">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                            <Rectangle
-                                x:Name="outerRectangle"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Fill="#FF58BAB1"
-                                RadiusX="10"
-                                RadiusY="10"
-                                Stroke="{TemplateBinding Background}"
-                                StrokeThickness="1" />
-                            <ContentPresenter
-                                Content="{TemplateBinding Content}"
-                                TextBlock.Foreground="White"
-                                TextBlock.TextAlignment="Center"
-                                TextElement.FontSize="16"
-                                TextElement.FontWeight="Regular"
-                                TextOptions.TextFormattingMode="Ideal"
-                                TextOptions.TextRenderingMode="Auto" />
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>-->
-    </Window.Resources>
+    Icon="{StaticResource LoginIcon}"
+    mc:Ignorable="d">
     <Window.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -134,7 +105,8 @@
 
             <Button
                 Grid.Row="4"
-                Grid.ColumnSpan="2" Grid.Column="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
                 Margin="5"
                 md:ColorZoneAssist.Mode="Light"
                 Command="{Binding TryLoginCommand}"

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Lab19_Oprosnik.Surveys;
 using System.Collections.ObjectModel;
-using Lab19_Oprosnik.Surveys;
 
 namespace Lab19_Oprosnik.Abstract
 {

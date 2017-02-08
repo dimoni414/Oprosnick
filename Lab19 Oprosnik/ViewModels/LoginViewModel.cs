@@ -27,6 +27,7 @@ namespace Lab19_Oprosnik.ViewModels
         public LoginViewModel(WindowManagerService windowManager, ICommandFactory commandFactory)
         {
             Email = "dimoni414@ya.ru";
+            Password = "1";
             _regAndLoginPeopleService = new RegAndLoginPeopleService();
             _windowManager = windowManager;
 

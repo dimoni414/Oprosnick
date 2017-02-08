@@ -58,7 +58,7 @@ namespace Lab19_Oprosnik.ViewModels
 
         public string LengthPassw1
         {
-            get { return PasswordStr1.Length.ToString(); }
+            get { return PasswordStr1?.Length.ToString(); }
             set { }
         }
 
@@ -113,6 +113,7 @@ namespace Lab19_Oprosnik.ViewModels
                     {
                         MessageBox.Show("Вы упешно зарегистрированы!");
                         ((LoginViewModel)_windowManagerService.GetViewModel(WindowType.Login)).Email = Email;
+                        ((LoginViewModel)_windowManagerService.GetViewModel(WindowType.Login)).Password = "";
                         _windowManagerService.Close(WindowType.Register);
                     }
                     else

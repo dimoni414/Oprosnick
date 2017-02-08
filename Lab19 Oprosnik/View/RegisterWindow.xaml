@@ -13,14 +13,7 @@
     Icon="{StaticResource RegistrationIcon}"
     mc:Ignorable="d">
     <Window.Resources>
-        <!--<ControlTemplate x:Key="validationFailed">
-            <StackPanel Orientation="Horizontal">
-                <Border BorderBrush="OrangeRed">
-                    <AdornedElementPlaceholder />
-                </Border>
-                <TextBlock FontSize="26" Foreground="DarkRed" />
-            </StackPanel>
-        </ControlTemplate>-->
+       
     </Window.Resources>
 
     <Window.Content>
@@ -45,11 +38,9 @@
                 </Grid.RowDefinitions>
                 <Label Content="E-mail адрес:" />
                 <TextBox Grid.Row="1">
-                    <!--  Validation.ErrorTemplate="{StaticResource validationFailed}"  -->
                     <TextBox.Text>
                         <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-
                                 <DataErrorValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
@@ -77,8 +68,6 @@
                     Background="{Binding ColorPassw1Brush}"
                     Content="{Binding LengthPassw1}"
                     IsEnabled="False" />
-
-                <!--  Сделать так, чтобы при наведении говорил, что пароль должен состоять из цифр и букв(хз как я это проверю)  -->
                 <PasswordBox
                     Name="PasswordBox"
                     Grid.Row="1"
@@ -87,7 +76,6 @@
                     psa:PasswordBoxAssistant.BindPassword="True"
                     psa:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordStr1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </Grid>
-
             <Grid Grid.Row="2" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
@@ -116,7 +104,6 @@
                     psa:PasswordBoxAssistant.BindPassword="True"
                     psa:PasswordBoxAssistant.BoundPassword="{Binding Path=PasswordStr2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
             </Grid>
-            <!--  не могу увеличить высоту.... вообще хз почему  -->
             <Grid Grid.Row="3" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25" />
@@ -148,7 +135,6 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="Пол" />
-                <!--  в зависимости от пола отображать после регистрации своем портфолио картинку пацан ты или девушка  -->
                 <StackPanel Grid.Row="1">
                     <RadioButton Content="Муж" IsChecked="{Binding Sex}" />
                     <RadioButton Content="Жен" />

@@ -9,7 +9,6 @@ namespace Lab19_Oprosnik.Surveys
     {
         public ObservableCollection<QuestionObject> QuestionsCollection { get; set; }
 
-
         public int CheckedVariant
         {
             get { return _checkedVariant; }
@@ -43,6 +42,5 @@ namespace Lab19_Oprosnik.Surveys
         private bool _isRelativeResults;
         private string _title;
         private int _checkedVariant;
-
     }
 }

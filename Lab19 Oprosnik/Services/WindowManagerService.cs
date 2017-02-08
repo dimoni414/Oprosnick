@@ -103,6 +103,6 @@ namespace Lab19_Oprosnik.Services
         private bool CanCreateWindow(WindowType windowType) => !_dictionaryWindows.ContainsKey(windowType);
 
         private readonly Dictionary<WindowType, Window> _dictionaryWindows;
-        private CommandFactory _commandFactory;
+        private readonly CommandFactory _commandFactory;
     }
 }

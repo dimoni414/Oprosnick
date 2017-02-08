@@ -12,7 +12,6 @@ namespace Lab19_Oprosnik
         {
             var windowManager = new WindowManagerService();
             windowManager.Show(WindowType.Login, null);
-
             base.OnStartup(e);
         }
     }
